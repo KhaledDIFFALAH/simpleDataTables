@@ -393,6 +393,7 @@ class SimpleDataTables {
             th.className = 'sdt-sortable';
             th.addEventListener('click', () => {
                 var direction = th.dataset.sort === 'asc' ? 'desc' : 'asc';
+                headers.forEach(header => header.removeAttribute('data-sort'));
                 th.dataset.sort = direction;
                 this.sortData(index, direction);
             });
