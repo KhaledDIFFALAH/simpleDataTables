@@ -62,7 +62,7 @@ If you're using npm, you can import it into your project like so:
 import simpleDatatables from 'simpledatatables-js';
 ```
 
-If you're using the composer or manual installation method, include the simpleDataTables files in your HTML:
+If you're using composer, git or the manual installation method, include the simpleDataTables files in your HTML:
 
 ```html
 <link rel="stylesheet" href="path/to/css/std.css">
