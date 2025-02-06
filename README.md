@@ -29,7 +29,7 @@ You can install simpleDataTables using Composer.
 To install the library via Composer, run the following command:
 
 ```sh
-composer require khaleddiffalah/simple-datatables
+composer require khaleddiffalah/simpledatatables
 ```
 This will add the library as a dependency in your composer.json file.
 
