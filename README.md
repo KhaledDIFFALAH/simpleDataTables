@@ -33,7 +33,16 @@ composer require khaleddiffalah/simpledatatables
 ```
 This will add the library as a dependency in your composer.json file.
 
-### Manual Installation
+You can install simpleDataTables using npm:
+### Install via npm
+To install the library via npm, run the following command:
+
+```sh
+npm install simpledatatables-js
+```
+This will add the library as a dependency in your package.json file.
+
+### Install via git
 
 Clone the repository and include the script in your project:
 
@@ -41,14 +50,24 @@ Clone the repository and include the script in your project:
 git clone https://github.com/KhaledDIFFALAH/simpleDataTables.git
 ```
 
-Then, include it in your HTML file:
+### Manual Installation
+
+If you prefer not to use CDN, npm or composer, you can download the simpleDataTables files directly from the GitHub repository and include it in your project.
+
+## Usage
+
+If you're using npm, you can import it into your project like so:
+
+```javascript
+import simpleDatatables from 'simpledatatables-js';
+```
+
+If you're using the composer or manual installation method, include the simpleDataTables files in your HTML:
 
 ```html
 <link rel="stylesheet" href="path/to/css/std.css">
 <script src="path/to/js/std.js"></script>
 ```
-
-## Usage
 
 ### Basic Example
 
