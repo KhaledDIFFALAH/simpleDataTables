@@ -18,5 +18,10 @@
         "psr-4": {
             "KhaledDIFFALAH\\SimpleDataTables\\": "src/"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.0.x-dev"
+        }
     }
 }
