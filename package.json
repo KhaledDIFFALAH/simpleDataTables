@@ -1,5 +1,5 @@
 {
-  "name": "simpledatatables",
+  "name": "simpledatatables-js",
   "version": "1.0.0",
   "description": "A lightweight JavaScript class for creating sortable, searchable, and paginated data tables.",
   "main": "js/sdt.js",
