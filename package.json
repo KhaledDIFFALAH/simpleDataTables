@@ -1,0 +1,35 @@
+{
+  "name": "simpledatatables",
+  "version": "1.0.0",
+  "description": "A lightweight JavaScript class for creating sortable, searchable, and paginated data tables.",
+  "main": "js/sdt.js",
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KhaledDIFFALAH/simpleDataTables.git"
+  },
+  "keywords": [
+    "datatable",
+    "pagination",
+    "sorting",
+    "filtering",
+    "javascript",
+    "css",
+    "js",
+    "responsive",
+    "frontend",
+    "backend",
+    "web",
+    "data-table",
+    "sortable",
+    "searchable"
+  ],
+  "author": "Khaled DIFFALAH",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KhaledDIFFALAH/simpleDataTables/issues"
+  },
+  "homepage": "https://github.com/KhaledDIFFALAH/simpleDataTables#readme"
+}
