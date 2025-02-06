@@ -2,7 +2,7 @@
     "name": "khaleddiffalah/simpledatatables",
     "description": "A lightweight JavaScript class for handling data tables with sorting, filtering, and pagination.",
     "type": "library",
-    "keywords": ["datatable", "pagination", "sorting", "filtering", "javascript"],
+    "keywords": ["datatable", "pagination", "sorting", "filtering", "javascript", "css", "js", "responsive", "frontend", "backend", "web", "mobile"],
     "license": "MIT",
     "authors": [
         {
@@ -10,18 +10,5 @@
             "email": "kahled.diffalah@gmail.com",
             "homepage": "https://github.com/KhaledDIFFALAH"
         }
-    ],
-    "require": {
-        "php": ">=7.2"
-    },
-    "autoload": {
-        "psr-4": {
-            "KhaledDIFFALAH\\SimpleDataTables\\": "src/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-main": "1.0.x-dev"
-        }
-    }
+    ]
 }
