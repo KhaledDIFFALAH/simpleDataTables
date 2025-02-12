@@ -26,6 +26,9 @@ class SimpleDataTables {
             ...options,
         };
 
+        if (this.settings.tableScrollable && !this.table.classList.contains('table-no-spacing')) this.table.classList.add('table-no-spacing');
+        // if (!this.table.parentNode.classList.contains('sdt-container')) this.table.parentNode.classList.add('sdt-container');
+
         this.tbody = this.table.querySelector('tbody');
         this.data = Array.from(this.tbody.querySelectorAll('tr'));
         this.currentPage = 1;
@@ -33,39 +36,29 @@ class SimpleDataTables {
         this.filteredData = [...this.data]; // Data after search/filter
 
         // Load translations dynamically
-        this.loadTranslations(this.settings.language)
-            .then((translations) => {
-                this.translations = translations;
-                this.init();
-            })
-            .catch((error) => {
-                console.error("Failed to load translations:", error);
-                this.loadDefaultTranslations();
-            });
-        
+        this.loadTranslations(this.settings.language);
+
         this.columnVisibility = {}; // Track visibility of each column
         this.initializeColumnVisibility();
     }
 
-    async loadTranslations(language) {
+    async loadTranslations(language = 'default') {
         try {
-            var module = await import(`../i18n/${language}.js`);
-            return module.default;
+            // Try to import the selected language file
+            const module = await import(`../i18n/${language}.js`);
+            this.translations = module.default;
+            this.init();
         } catch (error) {
             console.warn(`Language file for '${language}' not found, falling back to default.`);
-            throw error;
-        }
-    }
-
-    async loadDefaultTranslations() {
-        try {
-            var response = await import(`../i18n/default.js`);
-            this.translations = response.default;
-            this.init();
-        } catch (error) {
-            console.error("Failed to load default language file:", error);
-            this.translations = {}; // Use an empty object as a last resort
-            this.init();
+            try {
+                // Fallback to the default language file
+                const module = await import(`../i18n/default.js`);
+                this.translations = module.default;
+                this.init();
+            } catch (error) {
+                console.error("Failed to load the default language file:", error);
+                this.translations = {}; // Use an empty object as a last resort
+            }
         }
     }
 
@@ -78,17 +71,19 @@ class SimpleDataTables {
 
     applyTableScroll() {
         var tableWidth = this.table.offsetWidth;
-        var tablParentWidth = this.table.parentNode.offsetWidth;
+        var tableParentWidth = this.table.parentNode.offsetWidth;
         if (this.settings.tableScrollable) {
             this.table.style.overflowX = "auto";
-            this.table.style.display = (tableWidth > tablParentWidth) ? "block" : "table";
+            this.table.style.display = (tableWidth > tableParentWidth) ? "block" : "table";
             if (this.settings.tableMaxHeight) {
                 this.table.style.overflowY = "auto";
                 this.table.style.maxHeight = `${this.settings.tableMaxHeight}px`; // Apply max height
-            } else {
+            }
+            else {
                 this.table.style.overflowY = "visible"; // Default behavior if maxHeight isn't set
             }
-        } else {
+        }
+        else {
             // Reset styles if scroll is disabled
             this.table.style.overflowX = "visible";
             this.table.style.overflowY = "visible";
@@ -101,9 +96,8 @@ class SimpleDataTables {
         if (this.settings.enableFilters) this.createColumnFilters();
         if (this.settings.dataSorting) this.enableSorting();
         
-        this.createFooterControls();
-
         this.applyTableScroll();
+        this.createFooterControls();
         this.renderTable();
     }
 
@@ -147,13 +141,16 @@ class SimpleDataTables {
             this.currentPage = 1;
             this.renderTable();
         });
+
         leftControls.appendChild(rowsSelector);
 
         var entriesText = document.createElement('span');
         entriesText.textContent = this.translations.entriesPerPage;
         leftControls.appendChild(entriesText);
 
-        sdtHeaderLeft.appendChild(leftControls);
+        if (this.settings.pagination) {
+            sdtHeaderLeft.appendChild(leftControls);
+        }
 
         // Right controls: "Search:" and Search bar
         if (this.settings.searchbar) {
@@ -182,6 +179,7 @@ class SimpleDataTables {
 
         // Add column management button
         var columnManagerButton = document.createElement('button');
+        columnManagerButton.type = 'button';
         columnManagerButton.innerHTML = "<i class='sdti sdti-gear'></i>";
         columnManagerButton.className = 'btn btn-sm btn-primary sdt-header-btn';
         columnManagerButton.addEventListener('click', () => this.showColumnManager());
@@ -304,6 +302,7 @@ class SimpleDataTables {
     createColumnFilters() {
         var headerRow = this.table.querySelector('thead tr');
         var filterRow = document.createElement('tr');
+        filterRow.className = 'sdt-filter-row';
     
         Array.from(headerRow.children).forEach((th, index) => {
             var filterCell = document.createElement('th');
@@ -346,7 +345,7 @@ class SimpleDataTables {
     
     createFooterControls() {
         var container = document.createElement('div');
-        container.className = 'd-flex justify-content-between align-items-center mt-3';
+        container.className = (!this.settings.pagination) ? 'd-none' : 'd-flex justify-content-between align-items-center mt-3';
 
         // Entries info
         this.entriesInfo = document.createElement('div');
@@ -571,6 +570,8 @@ class SimpleDataTables {
 
     renderTable() {
         var data = this.filteredData || this.data;
+
+        this.table.classList.add("sdt-table");
 
         // Clear the table body
         this.tbody.innerHTML = '';
