@@ -164,4 +164,5 @@ Developed by [Khaled DIFFALAH](https://github.com/KhaledDIFFALAH).
 ## Support
 
 If you find this project useful, please consider giving it a ⭐ on [GitHub](https://github.com/KhaledDIFFALAH/simpleDataTables).
+
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R6R310LEU4)
