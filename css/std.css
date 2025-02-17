@@ -1,51 +1,51 @@
 @font-face {
-    font-family: 'sdt-font';
-    src:  url('../fonts/sdt-font.eot?plxerj');
-    src:  url('../fonts/sdt-font.eot?plxerj#iefix') format('embedded-opentype'),
-      url('../fonts/sdt-font.ttf?plxerj') format('truetype'),
-      url('../fonts/sdt-font.woff?plxerj') format('woff'),
-      url('../fonts/sdt-font.svg?plxerj#sdt-font') format('svg');
-    font-weight: normal;
-    font-style: normal;
-    font-display: block;
-  }
-  
-  .sdti {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'sdt-font' !important;
-    speak: never;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-  
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  .sdti-gear:before {
-    content: "\e900";
-  }
-  .sdti-gear-filled:before {
-    content: "\e901";
-  }
-  .sdti-gears:before {
-    content: "\e902";
-  }
-  .sdti-sort-arrows:before {
-    content: "\e903";
-  }
-  .sdti-sort-arrows-asc:before {
-    content: "\e904";
-  }
-  .sdti-sort-arrows-desc:before {
-    content: "\e905";
-  }
-  .sdti-sort-arrows-filled:before {
-    content: "\e906";
-  }
+  font-family: 'sdt-font';
+  src:  url('../fonts/sdt-font.eot?plxerj');
+  src:  url('../fonts/sdt-font.eot?plxerj#iefix') format('embedded-opentype'),
+    url('../fonts/sdt-font.ttf?plxerj') format('truetype'),
+    url('../fonts/sdt-font.woff?plxerj') format('woff'),
+    url('../fonts/sdt-font.svg?plxerj#sdt-font') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.sdti {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'sdt-font' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.sdti-gear:before {
+  content: "\e900";
+}
+.sdti-gear-filled:before {
+  content: "\e901";
+}
+.sdti-gears:before {
+  content: "\e902";
+}
+.sdti-sort-arrows:before {
+  content: "\e903";
+}
+.sdti-sort-arrows-asc:before {
+  content: "\e904";
+}
+.sdti-sort-arrows-desc:before {
+  content: "\e905";
+}
+.sdti-sort-arrows-filled:before {
+  content: "\e906";
+}
 
 
 .sdt-container ::-webkit-scrollbar-track{background-color:transparent !important}
@@ -54,6 +54,7 @@
 .sdt-container ::-webkit-scrollbar-thumb:hover{background-color:var(--bs-gray-600) !important;}
 
 .sdt-table {margin:0;}
+.sdt-table thead.sdt-theadSticky {position: sticky;top: 0;}
 
 .sdt-max-entries-per-page {width: max-content !important;min-width: unset !important;}
 .sdt-header-btn {min-width: 2rem;height: 2rem;padding-inline: 0.5rem;}
@@ -66,7 +67,7 @@
 .sdt-sortable[data-sort='desc']::after {content: "\e905";}
 
 .sdt-filter-row td, .sdt-filter-row th {background: var(--bs-gray-200) !important;}
-.sdt-filter-input {max-width: 100% !important;}
+.sdt-filter-input {max-width: 100% !important;min-width: 100px !important;}
 
 .sdt-pagination {position: relative;display: flex;flex-flow: wrap;align-items: center;justify-content: center;gap: 0.375rem;}
 .sdt-pagination-btn {min-width: 2rem;height: 2rem;align-items: center;justify-content: center;border: 0;background-color: var(--bs-light);box-shadow: 0 0 0.25em rgba(var(--bs-dark-rgb),0.5);}

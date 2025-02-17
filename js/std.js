@@ -23,10 +23,12 @@ class SimpleDataTables {
             language: 'en', // Default language
             tableScrollable: true,
             tableMaxHeight: null,
+            theadSticky: false,
             ...options,
         };
 
         if (this.settings.tableScrollable && !this.table.classList.contains('table-no-spacing')) this.table.classList.add('table-no-spacing');
+        if (this.settings.theadSticky && !this.table.querySelector('thead').classList.contains('sdt-theadSticky')) this.table.querySelector('thead').classList.add('sdt-theadSticky');
         // if (!this.table.parentNode.classList.contains('sdt-container')) this.table.parentNode.classList.add('sdt-container');
 
         this.tbody = this.table.querySelector('tbody');
@@ -73,21 +75,10 @@ class SimpleDataTables {
         var tableWidth = this.table.offsetWidth;
         var tableParentWidth = this.table.parentNode.offsetWidth;
         if (this.settings.tableScrollable) {
-            this.table.style.overflowX = "auto";
-            this.table.style.display = (tableWidth > tableParentWidth) ? "block" : "table";
+            this.table.parentNode.style.overflow = "auto";
             if (this.settings.tableMaxHeight) {
-                this.table.style.overflowY = "auto";
-                this.table.style.maxHeight = `${this.settings.tableMaxHeight}px`; // Apply max height
+                this.table.parentNode.style.maxHeight = `${this.settings.tableMaxHeight}px`; // Apply max height
             }
-            else {
-                this.table.style.overflowY = "visible"; // Default behavior if maxHeight isn't set
-            }
-        }
-        else {
-            // Reset styles if scroll is disabled
-            this.table.style.overflowX = "visible";
-            this.table.style.overflowY = "visible";
-            this.table.style.maxHeight = "";
         }
     }
 
@@ -96,7 +87,22 @@ class SimpleDataTables {
         if (this.settings.enableFilters) this.createColumnFilters();
         if (this.settings.dataSorting) this.enableSorting();
         
-        this.applyTableScroll();
+        if (this.settings.tableScrollable) {
+            let tableWrapper = document.createElement("div");
+            tableWrapper.id = "sdt-tableWrapper";
+        
+            this.table.parentNode.insertBefore(tableWrapper, this.table);
+            tableWrapper.appendChild(this.table);
+        
+            let sdtHeader = this.table.querySelector("#sdtHeader");
+        
+            if (sdtHeader) {
+                sdtHeader.insertAdjacentElement("afterend", tableWrapper);
+            }
+
+            this.applyTableScroll();
+        }
+
         this.createFooterControls();
         this.renderTable();
     }
@@ -311,7 +317,7 @@ class SimpleDataTables {
             if (columnFilter) {
                 if (columnFilter.type === 'select') {
                     var select = document.createElement('select');
-                    select.className = 'form-select sdt-filter-input';
+                    select.className = 'form-select form-select-sm sdt-filter-input';
                     select.innerHTML = `<option value="">${this.translations.All}</option>`;
                     columnFilter.options.forEach(option => {
                         select.innerHTML += `<option value="${option}">${option}</option>`;
@@ -323,7 +329,7 @@ class SimpleDataTables {
                 } else if (columnFilter.type === 'text') {
                     var input = document.createElement('input');
                     input.type = 'search';
-                    input.className = 'form-control w-auto sdt-filter-input';
+                    input.className = 'form-control form-control-sm w-auto sdt-filter-input';
                     input.placeholder = (columnFilter.placeholder) ? columnFilter.placeholder : this.translations.filterInputPlaceholder;
                     input.addEventListener('input', () => {
                         this.applyFilters();
